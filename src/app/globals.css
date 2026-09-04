@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* ============================================================
+   OMG Cleaning — Design System
+   Light, airy and clinical-fresh: a cleaning brand should feel
+   like sunlight on a spotless surface. Emerald carries over from
+   the admin dashboard and reads as "WhatsApp" to a UAE audience.
+   ============================================================ */
+
+@theme {
+  /* -- 01 Colour ------------------------------------------- */
+  --color-porcelain: #fbfcfb; /* page background */
+  --color-mist: #f2f6f4; /* elevated surfaces, alternating bands */
+  --color-line: #e2eae6; /* hairline borders */
+  --color-ink: #0c1a15; /* headings */
+  --color-slate: #55665f; /* body copy */
+  --color-emerald: #10b981; /* primary action */
+  --color-emerald-deep: #059669; /* hover / pressed */
+  --color-emerald-tint: #ecfdf5; /* washes, chips */
+
+  /* -- 02 Typography --------------------------------------- */
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display-xl: 4.5rem; /* 72px */
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-xl--font-weight: 800;
+
+  --text-display-l: 3rem; /* 48px */
+  --text-display-l--line-height: 1.06;
+  --text-display-l--letter-spacing: -0.03em;
+  --text-display-l--font-weight: 700;
+
+  --text-display-m: 2rem; /* 32px */
+  --text-display-m--line-height: 1.14;
+  --text-display-m--letter-spacing: -0.02em;
+  --text-display-m--font-weight: 700;
+
+  --text-title: 1.25rem; /* 20px */
+  --text-title--line-height: 1.3;
+  --text-title--font-weight: 600;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.55;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-porcelain);
+  color: var(--color-slate);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+}
+
+/* Hero reveal.
+   Hidden up front so the copy cannot appear for a frame before GSAP claims it — the reveal is
+   driven by the squeegee's position, so anything visible earlier is a flash. GSAP writes inline
+   styles and outranks these; the <noscript> block in layout.tsx undoes them when there is no
+   script to do the revealing. */
+.js-word,
+.js-room-word {
+  opacity: 0;
+}
+
+.js-hero-copy,
+.js-room-copy {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Respect users who prefer reduced motion: neutralise transitions and
+   let the hero video hold on its first frame rather than loop. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
